@@ -18,45 +18,33 @@ PyTorch con CUDA
 🔧 Instalación de Dependencias
 Ejecuta los siguientes comandos en tu entorno virtual:
 
-bash
-Copiar
-Editar
+
 pip install ultralytics opencv-contrib-python torch torchvision torchaudio ffmpeg-python
 Verifica que todo esté correctamente instalado:
 
-bash
-Copiar
-Editar
+
 python src/check_environment.py
 🚀 Uso del Proyecto
 1️⃣ Extraer Frames de los Videos
-bash
-Copiar
-Editar
+
 python src/extract_frames.py
 📌 Entrada: Videos en data/videos/
 📌 Salida: Frames en data/frames_extracted/
 
 2️⃣ Filtrar Crestas de Olas
-bash
-Copiar
-Editar
+
 python src/detect_wave_crests.py
 📌 Entrada: Frames de data/frames_extracted/
 📌 Salida: Solo los frames con crestas en data/frames_crest/
 
 3️⃣ Entrenar YOLOv8
-bash
-Copiar
-Editar
+
 python src/train_yolov8.py
 📌 Requiere dataset etiquetado en Roboflow
 📌 Salida: Modelo YOLO entrenado en models/best.pt
 
 4️⃣ Ejecutar Inferencia con YOLO
-bash
-Copiar
-Editar
+
 python src/infer_yolov8.py
 📌 Entrada: Frames extraídos en data/frames_extracted/
 📌 Salida: Solo los frames clasificados como "olas en cresta" en data/frames_crest/
@@ -64,9 +52,6 @@ python src/infer_yolov8.py
 📊 Visualización de Resultados
 Puedes utilizar Matplotlib o cualquier visor de imágenes para revisar los frames guardados en data/frames_crest/:
 
-bash
-Copiar
-Editar
 eog data/frames_crest/frame_00001.jpg
 💡 Futuras Mejoras
 Implementar detección en tiempo real con una cámara IP usando OpenCV y YOLO.

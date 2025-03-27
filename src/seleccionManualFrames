@@ -2,7 +2,7 @@ import cv2
 import os
 
 # Rutas de entrada y salida
-input_folder = "frames"
+input_folder = "data/frames_extracted"
 output_folder_crest = "dataset/wave_crest"
 output_folder_trough = "dataset/wave_trough"
 output_folder_discarded = "dataset/discarded"  # Opción para imágenes no útiles

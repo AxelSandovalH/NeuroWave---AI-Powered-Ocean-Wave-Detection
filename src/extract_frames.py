@@ -8,8 +8,7 @@ output_folder = "data/frames_extracted"
 os.makedirs(output_folder, exist_ok=True)
 
 # Comando FFmpeg para extraer frames
-command = f"ffmpeg -i {video_path} -vsync 0 -q:v 2 {output_folder}/frame_%05d.jpg"
-
+command = f"ffmpeg -i {video_path} -vf 'fps=0.5' -vsync 0 -q:v 2 {output_folder}/frame_%05d.jpg"
 # Ejecutar comando
 os.system(command)
 

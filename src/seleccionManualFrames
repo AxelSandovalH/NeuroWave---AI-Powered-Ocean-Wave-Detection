@@ -1,0 +1,49 @@
+import cv2
+import os
+
+# Rutas de entrada y salida
+input_folder = "frames"
+output_folder_crest = "dataset/wave_crest"
+output_folder_trough = "dataset/wave_trough"
+output_folder_discarded = "dataset/discarded"  # Opción para imágenes no útiles
+
+# Crear carpetas si no existen
+os.makedirs(output_folder_crest, exist_ok=True)
+os.makedirs(output_folder_trough, exist_ok=True)
+os.makedirs(output_folder_discarded, exist_ok=True)
+
+# Obtener lista ordenada de frames
+frame_list = sorted(os.listdir(input_folder))
+
+print("📌 Controles:")
+print("➡️ 'c' → Guardar en wave_crest")
+print("➡️ 't' → Guardar en wave_trough")
+print("➡️ 'd' → Descartar imagen")
+print("➡️ 'q' → Salir")
+
+for frame in frame_list:
+    img_path = os.path.join(input_folder, frame)
+    img = cv2.imread(img_path)
+
+    if img is None:
+        print(f"⚠️ Error al cargar {frame}, se omitirá.")
+        continue
+
+    cv2.imshow("Selecciona la categoría (c/t/d) - Presiona 'q' para salir", img)
+
+    key = cv2.waitKey(0) & 0xFF  # Espera por entrada del usuario
+
+    if key == ord('c'):  # Guardar en wave_crest
+        cv2.imwrite(os.path.join(output_folder_crest, frame), img)
+        print(f"✅ {frame} guardado en wave_crest")
+    elif key == ord('t'):  # Guardar en wave_trough
+        cv2.imwrite(os.path.join(output_folder_trough, frame), img)
+        print(f"✅ {frame} guardado en wave_trough")
+    elif key == ord('d'):  # Descartar imagen
+        cv2.imwrite(os.path.join(output_folder_discarded, frame), img)
+        print(f"🗑️ {frame} descartado")
+    elif key == ord('q'):  # Salir del programa
+        print("🚪 Saliendo...")
+        break
+
+cv2.destroyAllWindows()
